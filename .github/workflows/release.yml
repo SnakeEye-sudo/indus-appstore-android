@@ -16,11 +16,18 @@ jobs:
         run: |
           echo "Building Android app..."
           # Add your Android build commands here
+                    chmod +x ./gradlew
           # Example: ./gradlew assembleRelease
+                    ./gradlew assembleRelease
+                              ./gradlew bundleRelease
 
       - name: Deploy to Indus Appstore
         uses: PhonePe/Indus-Flows@v1
         with:
+                  app_bundle_path: 'app/build/outputs/bundle/release/app-release.aab'
+                            api_key: ${{ secrets.INDUS_API_KEY }}
+                                      # Configure with your app details:
+                                                # app_id: your-app-id
           # Add your PhonePe API configuration
           # app_bundle_path: 'app/build/outputs/bundle/release/app-release.aab'
           # api_key: ${{ secrets.INDUS_API_KEY }}
