@@ -1,0 +1,30 @@
+name: Deploy to Indus Appstore
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Android App
+        run: |
+          echo "Building Android app..."
+          # Add your Android build commands here
+          # Example: ./gradlew assembleRelease
+
+      - name: Deploy to Indus Appstore
+        uses: PhonePe/Indus-Flows@v1
+        with:
+          # Add your PhonePe API configuration
+          # app_bundle_path: 'app/build/outputs/bundle/release/app-release.aab'
+          # api_key: ${{ secrets.INDUS_API_KEY }}
+          # app_id: ${{ secrets.INDUS_APP_ID }}
+          # Replace above with your actual configuration
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
